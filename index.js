@@ -110,8 +110,8 @@ controller.hears(
             return body;
         });
 
-        bot.reply(message,'Here are the current extractions:/n'+current_extractions);
-        bot.reply(message,'Here are the upcoming extractions:/n'+future_extractions);
+        bot.reply(message,"Here are the current extractions:\\n"+current_extractions);
+        bot.reply(message,"Here are the upcoming extractions:\\n"+future_extractions);
     }
 );
 
