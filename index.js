@@ -95,6 +95,14 @@ controller.hears(
         bot.reply(message,'Hello!');
     }
 );
+controller.hears(
+    ['extraction', 'extractions'],
+    ['direct_mention', 'mention', 'direct_message'],
+    function(bot,message) {
+        bot.reply(message,'Here are the current extractions:');
+        bot.reply(message,'Here are the upcoming extractions:');
+    }
+);
 
 
 /**
