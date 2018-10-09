@@ -103,12 +103,15 @@ controller.hears(
     ['direct_mention', 'mention', 'direct_message'],
     function(bot,message) {
 
-        let the_message = client.get('extraction-test.json', function(err, res, body) {
-            return body.toString();
+        let current_extractions = client.get('extraction-test.json', function(err, res, body) {
+            return body;
+        });
+        let future_extractions = client.get('extraction-test.json', function(err, res, body) {
+            return body;
         });
 
-        bot.reply(message,'Here are the current extractions:'+the_message);
-        bot.reply(message,'Here are the upcoming extractions:');
+        bot.reply(message,'Here are the current extractions:/n'+current_extractions);
+        bot.reply(message,'Here are the upcoming extractions:/n'+future_extractions);
     }
 );
 
