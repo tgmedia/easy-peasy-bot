@@ -95,11 +95,24 @@ controller.hears(
         bot.reply(message,'Hello!');
     }
 );
+
 controller.hears(
     ['extraction', 'extractions'],
     ['direct_mention', 'mention', 'direct_message'],
     function(bot,message) {
-        bot.reply(message,'Here are the current extractions:');
+        const url = 'https://orders.black-reign.co.uk/extraction-test.json', xhr = new XMLHttpRequest();
+        let the_message = '';
+        xhr.open('GET', url, true);
+        xhr.send();
+
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const myArr = JSON.parse(this.responseText);
+                the_message = myArr.toString();
+            }
+        };
+
+        bot.reply(message,'Here are the current extractions:'+the_message);
         bot.reply(message,'Here are the upcoming extractions:');
     }
 );
