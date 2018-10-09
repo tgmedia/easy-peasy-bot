@@ -75,6 +75,8 @@ controller.on('rtm_close', function (bot) {
     // you may want to attempt to re-open
 });
 
+var request = require('request-json');
+var client = request.createClient('https://orders.black-reign.co.uk/');
 
 /**
  * Core bot logic goes here!
@@ -100,17 +102,10 @@ controller.hears(
     ['extraction', 'extractions'],
     ['direct_mention', 'mention', 'direct_message'],
     function(bot,message) {
-        const url = 'https://orders.black-reign.co.uk/extraction-test.json', xhr = new XMLHttpRequest();
-        let the_message = '';
-        xhr.open('GET', url, true);
-        xhr.send();
 
-        xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                const myArr = JSON.parse(this.responseText);
-                the_message = myArr.toString();
-            }
-        };
+        let the_message = client.get('extraction-test.json', function(err, res, body) {
+            return body.toString();
+        });
 
         bot.reply(message,'Here are the current extractions:'+the_message);
         bot.reply(message,'Here are the upcoming extractions:');
